@@ -401,8 +401,8 @@ namespace grove {
 
     export class GroveJoystick
     {
-        xPin: DigitalPin;
-        yPin: DigitalPin;
+        xPin: AnalogPin;
+        yPin: AnalogPin;
         
         read(): number {
             let xdata = 0, ydata = 0, result = 0;
