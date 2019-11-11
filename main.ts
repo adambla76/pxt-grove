@@ -406,9 +406,9 @@ namespace grove {
         
         read(): number {
             let xdata = 0, ydata = 0, result = 0;
-            if (xPin && yPin) {
-                xdata = pins.analogReadPin(xPin);
-                ydata = pins.analogReadPin(yPin);
+            if (this.xPin && this.yPin) {
+                xdata = pins.analogReadPin(this.xPin);
+                ydata = pins.analogReadPin(this.yPin);
                 if (xdata > 1000) {
                     result = GroveJoystickKey.Press;
                 }
