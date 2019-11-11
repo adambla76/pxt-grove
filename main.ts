@@ -401,7 +401,10 @@ namespace grove {
 
     export class GroveJoystick
     {
-        read(xPin: AnalogPin, yPin: AnalogPin): number {
+        xPin: DigitalPin;
+        yPin: DigitalPin;
+        
+        read(): number {
             let xdata = 0, ydata = 0, result = 0;
             if (xPin && yPin) {
                 xdata = pins.analogReadPin(xPin);
@@ -437,34 +440,50 @@ namespace grove {
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let distanceBackup: number = 0;
-    let joystick = new GroveJoystick();
+    let joystick : GroveJoystick;
     let paj7620 = new PAJ7620();
 
+
+    /**
+     * Create a new driver Grove - Thumb Joystick
+     * @param xPin value of x-axis pin 
+     * @param yPin value of y-axis pin
+     */
+    //% blockId=grove_joystick_create block="Thumb Joystick at|%xPin|and|%yPin"
+    //% xPin.defl = P1
+    //% yPin.defl = P2
+    //% group=Joystick
+    export function createJoystick(xPin: DigitalPin, yPin: DigitalPin): void
+    {
+        let joystick = new GroveJoystick();
+        
+        joy.xPin = xPin;
+        joy.yPin = yPin;        
+    }
+ 
     /**
      * get Joystick key
      * 
      */
     //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%ypin"
     //% group=Joystick
-    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
-        return joystick.read(xpin, ypin);
+    export function getJoystick(): number {
+        return joystick.read();
     }
 
 
     /**
      * Do something when a key is detected by Grove - Thumb Joystick
      * @param key type of joystick to detect
-     * @param xpin
-     * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on |%key at|%xpin|and|%ypin"
+    //% blockId=grove_joystick_create_event block="on |%key"
     //% group=Joystick
-    export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
+    export function onJoystick(key: GroveJoystickKey, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
             while(true) {
-                    const ckey = joystick.read(xpin, ypin);
+                    const ckey = joystick.read();
                     if (ckey != lastJoystick) {
                       lastJoystick = ckey; 
                       if(key != 10) {
