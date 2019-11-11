@@ -440,7 +440,7 @@ namespace grove {
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let distanceBackup: number = 0;
-    let joystick : GroveJoystick;
+    let joystick = new GroveJoystick();
     let paj7620 = new PAJ7620();
 
 
@@ -455,8 +455,7 @@ namespace grove {
     //% group=Joystick
     export function createJoystick(xPin: AnalogPin, yPin: AnalogPin): void
     {
-        let joystick = new GroveJoystick();
-        
+        //let joystick = new GroveJoystick();
         joystick.xPin = xPin;
         joystick.yPin = yPin;        
     }
