@@ -84,12 +84,11 @@ enum GroveJoystickKey {
 }
 
 
-declare const enum FanStatus
-{
-//% block="open" enumval=1
-FAN_OPEN = 1,
-//% block="close" enumval=2
-FAN_CLOSE = 2,
+declare const enum FanStatus {
+    //% block=open
+    High = 1,  
+    //% block=close
+    Low = 2,  
 }
 
 
