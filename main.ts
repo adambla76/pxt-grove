@@ -442,7 +442,7 @@ namespace grove {
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let paj7620 = new PAJ7620();
-
+    let display = new TM1637();
 
     /**
      * Create a new driver Grove - Thumb Joystick
@@ -564,9 +564,9 @@ namespace grove {
     //% clkPin.defl = P2
     //% dataPin.defl = P16
     //% group="4-Digit Display"
-    export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): TM1637
+    export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): void
     {
-        let display = new TM1637();
+        //let display = new TM1637();
         
         display.buf = pins.createBuffer(4);
         display.clkPin = clkPin;
@@ -575,7 +575,7 @@ namespace grove {
         display.pointFlag = false;
         display.clear();
         
-        return display;
+        //return display;
     }
  
     /**
