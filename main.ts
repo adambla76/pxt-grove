@@ -464,17 +464,17 @@ namespace grove {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
             while(true) {
-                if(key != 10) { 
                     const ckey = joystick.read(xpin, ypin);
                     if (ckey != lastJoystick) {
                       lastJoystick = ckey; 
-                      control.raiseEvent(joystickEventID, lastJoystick);
+                      if(key != 10) {
+                            control.raiseEvent(joystickEventID, lastJoystick);
+                      } 
+                      else { 
+                            control.raiseEvent(joystickEventID, 10); 
+                      }
                     }
-                }
-                else { 
-                    control.raiseEvent(joystickEventID, 10); 
-                }
-                basic.pause(50);
+                    basic.pause(50);
             }
         })
         
