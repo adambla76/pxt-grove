@@ -632,8 +632,8 @@ namespace grove {
     * Query data from DHT11/DHT22 sensor. If you are using 4 pins/no PCB board versions, you'll need to pull up the data pin. 
     * It is also recommended to wait 1 (DHT11) or 2 (DHT22) seconds between each query.
     */
-    //% block="Init $DHT|Data pin $dataPin|Pin pull up $pullUp|Serial output $serialOtput|Wait 2 sec after query $wait"
-    //% group="Sensor DHT11"
+    //% block="Init DHT11|Data pin $dataPin|Pin pull up $pullUp|Serial output $serialOtput|Wait 2 sec after query $wait"
+    //% group="Sensor-DHT11"
     //% serialOtput.defl=false
     //% wait.defl=true
     //% blockExternalInputs=true
@@ -651,8 +651,9 @@ namespace grove {
         _humidity = -999.0
         _temperature = -999.0
         _readSuccessful = false
-        let DHT: DHTtype = DHT11 
-        let pullUp: boolean = 1 
+        let DHT: DHTtype = DHTtype.DHT11 
+        let pullUp: boolean = true
+        
         startTime = input.runningTimeMicros()
 
         //request data
@@ -736,7 +737,7 @@ namespace grove {
     * Read humidity/temperature data from lastest query of DHT11/DHT22
     */
     //% block="Read $data"
-    //% group="Sensor DHT11"
+    //% group="Sensor-DHT11"
     export function readData(data: DHTdataType): number {
         if (_readSuccessful) return data == DHTdataType.humidity ? _humidity : _temperature
         else return -999
@@ -746,7 +747,7 @@ namespace grove {
     * Determind if last query is successful (checksum ok)
     */
     //% block="Last query successful?"
-    //% group="Sensor DHT11"
+    //% group="Sensor-DHT11"
     export function readDataSuccessful(): boolean {
         return _readSuccessful
     }
