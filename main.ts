@@ -453,7 +453,7 @@ namespace grove {
     //% xPin.defl = P1
     //% yPin.defl = P2
     //% group=Joystick
-    export function createJoystick(xPin: DigitalPin, yPin: DigitalPin): void
+    export function createJoystick(xPin: AnalogPin, yPin: AnalogPin): void
     {
         let joystick = new GroveJoystick();
         
