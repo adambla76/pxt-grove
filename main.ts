@@ -457,8 +457,8 @@ namespace grove {
     {
         let joystick = new GroveJoystick();
         
-        joy.xPin = xPin;
-        joy.yPin = yPin;        
+        joystick.xPin = xPin;
+        joystick.yPin = yPin;        
     }
  
     /**
