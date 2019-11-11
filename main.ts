@@ -399,7 +399,7 @@ namespace grove {
 
     export class GroveJoystick
     {
-        export read(xPin: AnalogPin, yPin: AnalogPin): number {
+        read(xPin: AnalogPin, yPin: AnalogPin): number {
             let xdata = 0, ydata = 0, result = 0;
             if (xPin && yPin) {
                 xdata = pins.analogReadPin(xPin);
