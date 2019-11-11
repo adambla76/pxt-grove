@@ -80,9 +80,9 @@ enum GroveJoystickKey {
     //% block=Lower-Right
     LR = 8,
     //% block=Press
-    Press = 9
+    Press = 9,
     //% block=Any
-    Press = 10
+    Any = 10
 }
 
 
