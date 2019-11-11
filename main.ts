@@ -139,7 +139,7 @@ namespace grove {
          */
         //% blockId=grove_gesture_init block="%strip|initiate the Grove - Gesture"
         //% advanced=true
-        //% group=['Gesture']
+        //% group=Gesture
         init() {
             this.paj7620Init();
             basic.pause(200);
@@ -149,7 +149,7 @@ namespace grove {
          * Detect and recognize the gestures from Grove - Gesture
          */
         //% blockId=grove_gesture_read block="%strip|get gesture"
-        //% group=['Gesture']
+        //% group=Gesture
         //% advanced=true
 
         read(): number {
@@ -261,7 +261,7 @@ namespace grove {
          * @param dispData value of number
          */
         //% blockId=grove_tm1637_display_number block="%strip|show number|%dispData"
-        //% group=['4Digit-Display']
+        //% group=4Digit-Display
         show(dispData: number)
         {       
             if(dispData < 10)
@@ -300,7 +300,7 @@ namespace grove {
          */
         //% blockId=grove_tm1637_set_display_level block="%strip|brightness level to|%level"
         //% level.min=0 level.max=7
-        //% group=['4Digit-Display']
+        //% group=4Digit-Display
         set(level: number)
         {
             this.brightnessLevel = level;
@@ -319,7 +319,7 @@ namespace grove {
         //% blockId=grove_tm1637_display_bit block="%strip|show single number|%dispData|at digit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
-        //% group=['4Digit-Display']
+        //% group=4Digit-Display
         //% advanced=true
         bit(dispData: number, bitAddr: number)
         {
@@ -348,7 +348,7 @@ namespace grove {
          * @param pointEn value of point switch
          */
         //% blockId=grove_tm1637_display_point block="%strip|turn|%point|colon point"
-        //% group=['4Digit-Display']
+        //% group=4Digit-Display
         //% advanced=true
         point(point: boolean)
         {
@@ -364,7 +364,7 @@ namespace grove {
          * Clear the display
          */
         //% blockId=grove_tm1637_display_clear block="%strip|clear"
-        //% group=['4Digit-Display']
+        //% group=4Digit-Display
         //% advanced=true
         clear()
         {
@@ -384,7 +384,7 @@ namespace grove {
          * @param yPin
          */
         //% blockId=grove_joystick_read block="%strip|read position of joystick"
-        //% group=['Joystick']
+        //% group=Joystick
         //% advanced=true
         read(xPin: AnalogPin, yPin: AnalogPin): number {
             let xdata = 0, ydata = 0, result = 0;
@@ -430,7 +430,7 @@ namespace grove {
      * @param pin signal pin of ultrasonic ranger module
      */
     //% blockId=grove_ultrasonic_centimeters block="Ultrasonic Sensor (in cm) at|%pin"
-    //% group=['UltraSonic']
+    //% group=UltraSonic
     export function measureInCentimeters(pin: DigitalPin): number
     {
         let duration = 0;
@@ -458,7 +458,7 @@ namespace grove {
      * @param pin signal pin of ultrasonic ranger module
      */
     //% blockId=grove_ultrasonic_inches block="Ultrasonic Sensor (in inch) at|%pin"
-    //% group=['UltraSonic']
+    //% group=UltraSonic
     export function measureInInches(pin: DigitalPin): number
     {
         let duration = 0;
@@ -487,7 +487,9 @@ namespace grove {
      * @param dataPin value of data pin number
      */
     //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|and|%dataPin"
-    //% group=['4Digit-Display']
+    //% clkPin.defl = P2
+    //% dataPin.defl = P16
+    //% group=4Digit-Display
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): TM1637
     {
         let display = new TM1637();
@@ -507,7 +509,7 @@ namespace grove {
      * 
      */
     //% blockId=grove_initgesture block="init gesture"
-    //% group=['Gesture']
+    //% group=Gesture
     export function initGesture() {
         if (!paj7620) {
             paj7620.init();
@@ -519,20 +521,10 @@ namespace grove {
      * 
      */
     //% blockId=grove_getgesture block="get gesture model"
-    //% group=['Gesture']
+    //% group=Gesture
     export function getGestureModel(): number {
         return paj7620.read();
     }
-    /**
-     * get Joystick key
-     * 
-     */
-    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%xpin"
-    //% group=['Joystick']
-    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
-        return joystick.read(xpin, ypin);
-    }
-
 
     /**
      * Do something when a gesture is detected by Grove - Gesture
@@ -540,7 +532,7 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_gesture_create_event block="on Gesture|%gesture"
-    //% group=['Gesture']
+    //% group=Gesture
     export function onGesture(gesture: GroveGesture, handler: () => void) {
         control.onEvent(gestureEventId, gesture, handler);
         paj7620.init();
@@ -558,6 +550,17 @@ namespace grove {
 
 
     /**
+     * get Joystick key
+     * 
+     */
+    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%xpin"
+    //% group=Joystick
+    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
+        return joystick.read(xpin, ypin);
+    }
+
+
+    /**
      * Do something when a key is detected by Grove - Thumb Joystick
      * @param key type of joystick to detect
      * @param xpin
@@ -565,7 +568,7 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_joystick_create_event block="on Key|%key"
-    //% group=['Joystick']
+    //% group=Joystick
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
         control.inBackground(() => {
