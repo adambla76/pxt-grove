@@ -71,15 +71,15 @@ enum GroveJoystickKey {
     Up = 3,
     //% block=Down
     Down = 4,
-    //% block=Upper left
+    //% block=Upper-Left
     UL = 5,
-    //% block=Upper right
+    //% block=Upper-Right
     UR = 6,
-    //% block=Lower left
+    //% block=Lower-Left
     LL = 7,
-    //% block=Lower right
+    //% block=Lower-Right
     LR = 8,
-    //% block=press
+    //% block=Press
     Press = 9
 }
 
