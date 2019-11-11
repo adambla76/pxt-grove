@@ -283,8 +283,8 @@ namespace grove {
          * Show a 4 digits number on display
          * @param dispData value of number
          */
-        //% blockId=grove_tm1637_display_number block="%strip|show number|%dispData"
-        //% group=4Digit-Display
+        //% blockId=grove_tm1637_display_number block="Show number|%dispData"
+        //% group="4-Digit Display"
         show(dispData: number)
         {       
             if(dispData < 10)
@@ -321,9 +321,9 @@ namespace grove {
          * Set the brightness level of display at from 0 to 7
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block="%strip|brightness level to|%level"
+        //% blockId=grove_tm1637_set_display_level block="brightness level to|%level"
         //% level.min=0 level.max=7
-        //% group=4Digit-Display
+        //% group="4-Digit Display"
         set(level: number)
         {
             this.brightnessLevel = level;
@@ -339,10 +339,10 @@ namespace grove {
          * @param dispData value of number
          * @param bitAddr value of bit number
          */
-        //% blockId=grove_tm1637_display_bit block="%strip|show single number|%dispData|at digit|%bitAddr"
+        //% blockId=grove_tm1637_display_bit block="Show single number|%dispData|at digit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
-        //% group=4Digit-Display
+        //% group="4-Digit Display"
         //% advanced=true
         bit(dispData: number, bitAddr: number)
         {
@@ -370,8 +370,8 @@ namespace grove {
          * Turn on or off the colon point on Grove - 4-Digit Display
          * @param pointEn value of point switch
          */
-        //% blockId=grove_tm1637_display_point block="%strip|turn|%point|colon point"
-        //% group=4Digit-Display
+        //% blockId=grove_tm1637_display_point block="Turn|%point|colon point"
+        //% group="4-Digit Display"
         //% advanced=true
         point(point: boolean)
         {
@@ -386,8 +386,8 @@ namespace grove {
         /**
          * Clear the display
          */
-        //% blockId=grove_tm1637_display_clear block="%strip|clear"
-        //% group=4Digit-Display
+        //% blockId=grove_tm1637_display_clear block="Clear Display"
+        //% group="4-Digit Display"
         //% advanced=true
         clear()
         {
@@ -563,7 +563,7 @@ namespace grove {
     //% blockId=grove_tm1637_create block="4-Digit Display at|%clkPin|and|%dataPin"
     //% clkPin.defl = P2
     //% dataPin.defl = P16
-    //% group=4Digit-Display
+    //% group="4-Digit Display"
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): TM1637
     {
         let display = new TM1637();
