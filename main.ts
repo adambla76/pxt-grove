@@ -84,6 +84,15 @@ enum GroveJoystickKey {
 }
 
 
+declare const enum FanStatus
+{
+//% block="open" enumval=1
+FAN_OPEN = 1,
+//% block="close" enumval=2
+FAN_CLOSE = 2,
+}
+
+
 /**
  * Functions to operate Grove module.
  */
@@ -583,4 +592,25 @@ namespace grove {
         })
         
     }
+
+    /**
+    * relay control(open / close)
+    */
+    //% blockId=relay_control block="relay %relaypin| set %status"
+    //% group=Relay
+    export function RelayControl(relaypin:DigitalPin , status:FanStatus): void
+    {
+        switch(status) {
+            case 1:
+                pins.digitalWritePin(relaypin,1);
+              break;
+            case 2:
+                pins.digitalWritePin(relaypin,0);
+              break;
+        }
+      
+
+    }
+
+
 }
