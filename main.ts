@@ -399,15 +399,7 @@ namespace grove {
 
     export class GroveJoystick
     {
-        /**
-         * Detect position from Grove - Thumb Joystick
-         * @param xPin
-         * @param yPin
-         */
-        //% blockId=grove_joystick_read block="%strip|read position of joystick"
-        //% group=Joystick
-        //% advanced=true
-        read(xPin: AnalogPin, yPin: AnalogPin): number {
+        export read(xPin: AnalogPin, yPin: AnalogPin): number {
             let xdata = 0, ydata = 0, result = 0;
             if (xPin && yPin) {
                 xdata = pins.analogReadPin(xPin);
@@ -445,7 +437,43 @@ namespace grove {
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let paj7620 = new PAJ7620();
-    
+
+    /**
+     * get Joystick key
+     * 
+     */
+    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%ypin"
+    //% group=Joystick
+    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
+        return joystick.read(xpin, ypin);
+    }
+
+
+    /**
+     * Do something when a key is detected by Grove - Thumb Joystick
+     * @param key type of joystick to detect
+     * @param xpin
+     * @param ypin
+     * @param handler code to run
+     */
+    //% blockId=grove_joystick_create_event block="on |%key at|%xpin|and|%ypin"
+    //% group=Joystick
+    export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
+        control.onEvent(joystickEventID, key, handler);
+        control.inBackground(() => {
+            while(true) {
+                const key = joystick.read(xpin, ypin);
+                if (key != lastJoystick) {
+                    lastJoystick = key; 
+                    control.raiseEvent(joystickEventID, lastJoystick);
+                }
+                basic.pause(50);
+            }
+        })
+        
+    }
+
+
     /**
      * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
      * @param pin signal pin of ultrasonic ranger module
@@ -570,40 +598,6 @@ namespace grove {
     }
 
 
-    /**
-     * get Joystick key
-     * 
-     */
-    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%ypin"
-    //% group=Joystick
-    export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
-        return joystick.read(xpin, ypin);
-    }
-
-
-    /**
-     * Do something when a key is detected by Grove - Thumb Joystick
-     * @param key type of joystick to detect
-     * @param xpin
-     * @param ypin
-     * @param handler code to run
-     */
-    //% blockId=grove_joystick_create_event block="on |%key at|%xpin|and|%ypin"
-    //% group=Joystick
-    export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
-        control.onEvent(joystickEventID, key, handler);
-        control.inBackground(() => {
-            while(true) {
-                const key = joystick.read(xpin, ypin);
-                if (key != lastJoystick) {
-                    lastJoystick = key; 
-                    control.raiseEvent(joystickEventID, lastJoystick);
-                }
-                basic.pause(50);
-            }
-        })
-        
-    }
 
     /**
     * relay control(open / close)
