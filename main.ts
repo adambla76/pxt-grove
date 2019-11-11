@@ -88,6 +88,7 @@ enum GroveJoystickKey {
  * Functions to operate Grove module.
  */
 //% weight=10 color=#9F79EE icon="\uf108" block="Grove"
+//% groups=['Sensors', 'others']
 namespace grove {
     /**
      * 
@@ -483,7 +484,7 @@ namespace grove {
         display.buf = pins.createBuffer(4);
         display.clkPin = clkPin;
         display.dataPin = dataPin;
-        display.brightnessLevel = 0;
+        display.brightnessLevel = 1;
         display.pointFlag = false;
         display.clear();
         
