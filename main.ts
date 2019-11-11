@@ -574,7 +574,7 @@ namespace grove {
      * get Joystick key
      * 
      */
-    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%xpin"
+    //% blockId=grove_getjoystick block="get joystick key at|%xpin|and|%ypin"
     //% group=Joystick
     export function getJoystick(xpin: AnalogPin, ypin: AnalogPin): number {
         return joystick.read(xpin, ypin);
@@ -588,7 +588,7 @@ namespace grove {
      * @param ypin
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on Key|%key"
+    //% blockId=grove_joystick_create_event block="on |%key at|%xpin|and|%ypin"
     //% group=Joystick
     export function onJoystick(key: GroveJoystickKey, xpin: AnalogPin, ypin: AnalogPin, handler: () => void) {
         control.onEvent(joystickEventID, key, handler);
@@ -632,8 +632,8 @@ namespace grove {
     * Query data from DHT11/DHT22 sensor. If you are using 4 pins/no PCB board versions, you'll need to pull up the data pin. 
     * It is also recommended to wait 1 (DHT11) or 2 (DHT22) seconds between each query.
     */
-    //% block="Init DHT11|Data pin $dataPin|Pin pull up $pullUp|Serial output $serialOtput|Wait 2 sec after query $wait"
-    //% group="Sensor-DHT11"
+    //% block="Init Sensor DHT11|Data pin $dataPin|Wait 2 sec after query $wait|Serial output $serialOtput"
+    //% group="Sensor DHT11"
     //% serialOtput.defl=false
     //% wait.defl=true
     //% blockExternalInputs=true
@@ -737,7 +737,7 @@ namespace grove {
     * Read humidity/temperature data from lastest query of DHT11/DHT22
     */
     //% block="Read $data"
-    //% group="Sensor-DHT11"
+    //% group="Sensor DHT11"
     export function readData(data: DHTdataType): number {
         if (_readSuccessful) return data == DHTdataType.humidity ? _humidity : _temperature
         else return -999
@@ -747,7 +747,7 @@ namespace grove {
     * Determind if last query is successful (checksum ok)
     */
     //% block="Last query successful?"
-    //% group="Sensor-DHT11"
+    //% group="Sensor DHT11"
     export function readDataSuccessful(): boolean {
         return _readSuccessful
     }
