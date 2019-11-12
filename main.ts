@@ -450,8 +450,8 @@ namespace grove {
      * @param yPin value of y-axis pin
      */
     //% blockId=grove_joystick_create block="Thumb Joystick at|%xPin|and|%yPin"
-    //% xPin.defl = P2
-    //% yPin.defl = P10
+    //% xPin.defl = P1
+    //% yPin.defl = P2
     //% group=Joystick
     export function createJoystick(xPin: AnalogPin, yPin: AnalogPin): void
     {
