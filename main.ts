@@ -160,7 +160,7 @@ namespace grove {
         /**
          * Create a new driver of Grove - Gesture
          */
-        //% blockId=grove_gesture_init block="%strip|initiate the Grove - Gesture"
+        //% blockId=grove_gesture_init block="%gest|initiate the Grove - Gesture"
         //% advanced=true
         //% group=Gesture
         init() {
@@ -171,7 +171,7 @@ namespace grove {
         /**
          * Detect and recognize the gestures from Grove - Gesture
          */
-        //% blockId=grove_gesture_read block="%strip|get gesture"
+        //% blockId=grove_gesture_read block="%gest|get gesture"
         //% group=Gesture
         //% advanced=true
 
@@ -283,7 +283,7 @@ namespace grove {
          * Show a 4 digits number on display
          * @param dispData value of number
          */
-        //% blockId=grove_tm1637_display_number block="%strip|show number|%dispData"
+        //% blockId=grove_tm1637_display_number block="%disp|show number|%dispData"
         //% group="4-Digit Display"
         show(dispData: number)
         {       
@@ -321,7 +321,7 @@ namespace grove {
          * Set the brightness level of display at from 0 to 7
          * @param level value of brightness light level
          */
-        //% blockId=grove_tm1637_set_display_level block="%strip|brightness level to|%level"
+        //% blockId=grove_tm1637_set_display_level block="%disp|brightness level to|%level"
         //% level.min=0 level.max=7
         //% group="4-Digit Display"
         set(level: number)
@@ -339,7 +339,7 @@ namespace grove {
          * @param dispData value of number
          * @param bitAddr value of bit number
          */
-        //% blockId=grove_tm1637_display_bit block="%strip|show single number|%dispData|at digit|%bitAddr"
+        //% blockId=grove_tm1637_display_bit block="%disp|show single number|%dispData|at digit|%bitAddr"
         //% dispData.min=0 dispData.max=9
         //% bitAddr.min=0 bitAddr.max=3
         //% group="4-Digit Display"
@@ -370,7 +370,7 @@ namespace grove {
          * Turn on or off the colon point on Grove - 4-Digit Display
          * @param point value of point switch
          */
-        //% blockId=grove_tm1637_display_point block="%strip|turn|%point|colon point"
+        //% blockId=grove_tm1637_display_point block="%disp|turn|%point|colon point"
         //% group="4-Digit Display"
         //% advanced=true
         point(point: boolean)
@@ -386,7 +386,7 @@ namespace grove {
         /**
          * Clear the display
          */
-        //% blockId=grove_tm1637_display_clear block="%strip|clear"
+        //% blockId=grove_tm1637_display_clear block="%disp|clear"
         //% group="4-Digit Display"
         //% advanced=true
         clear()
