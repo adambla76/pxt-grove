@@ -74,31 +74,30 @@
     // display.clear();
     // display.bit(3, 3);
     // basic.pause(500);
-    
+
     // display.point(false);
     // display.clear();
     // display.bit(2, 2);
     // basic.pause(500);
-    
+
     // display.point(true);
     // display.clear();
     // display.bit(1, 1);
     // basic.pause(500);
-    
+
     // display.point(false);
     // display.clear();
     // display.bit(0, 0);
     // basic.pause(500);
-    
+
     // display.set(7);
     // let p : grove.PAJ7620;
     // p.init();
-    
-    while(true)
-    {
-    //     display.show(data ++);
-    //     let distance = grove.measureInCentimeters(DigitalPin.P0);
-        basic.showNumber(12);
-        basic.pause(2000);
+
+    while (true) {
+        //     display.show(data ++);
+        //     let distance = grove.measureInCentimeters(DigitalPin.P0);
+        //basic.showNumber(12);
+        //basic.pause(2000);
     }
 }
