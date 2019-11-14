@@ -1,6 +1,6 @@
 {
     "name": "Grove",
-    "version": "0.1.33",
+    "version": "0.1.34",
     "description": "A Microsoft MakeCode package for Seeed Studio Grove module",
     "license": "MIT",
     "dependencies": {
