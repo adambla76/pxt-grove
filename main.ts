@@ -568,7 +568,7 @@ namespace grove {
     /**
      * Do something when move is detected by Grove - Thumb Joystick
      */
-    //% blockId=grove_joystick_create_event block="on Joystick |%key"
+    //% block="on Joystick $key"
     //% draggableParameters
     //% group=Joystick
     export function onJoystick(handler: (key: GroveJoystickKey) => void) {
