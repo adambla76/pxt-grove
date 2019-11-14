@@ -443,7 +443,7 @@ namespace grove {
         
         State(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
-            basic.pause(200);
+            //basic.pause(200);
             if(vol==1) {
                 this._state = !this._state;
                 if(this._state) {
