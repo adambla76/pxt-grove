@@ -426,7 +426,7 @@ namespace grove {
             return value;
         }
 
-        percent() : number {
+        percent(): number {
             let value = this.read();
             return Math.round(100 * (value / 1023));
         }
@@ -435,24 +435,24 @@ namespace grove {
     export class GroveLedButton {
         ButtonPin: DigitalPin;
         LedPin: DigitalPin;
-        _state : boolean;
-        
+        _state: boolean;
+
         constructor() {
             this._state = false;
         }
-        
+
         State(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
             //basic.pause(200);
-            if(vol==0) {
+            if (vol == 0) {
                 this._state = !this._state;
-                if(this._state) {
-                   pins.digitalWritePin(this.LedPin, 1)
+                if (this._state) {
+                    pins.digitalWritePin(this.LedPin, 1)
                 }
                 else {
-                   pins.digitalWritePin(this.LedPin, 0)
+                    pins.digitalWritePin(this.LedPin, 0)
                 }
-            }    
+            }
             return this._state;
         }
 
@@ -566,30 +566,31 @@ namespace grove {
 
 
     /**
-     * Do something when a key is detected by Grove - Thumb Joystick
+     * Do something when move is detected by Grove - Thumb Joystick
      * @param key type of joystick to detect
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on |%key"
+    //% blockId=grove_joystick_create_event block="on |%key key $handlerArg"
+    //% draggableParameters
     //% group=Joystick
-    export function onJoystick(key: GroveJoystickKey, handler: () => void) {
-        control.onEvent(joystickEventID, key, handler);
-        control.inBackground(() => {
-            while (true) {
-                const ckey = joystick.read();
-                if (ckey != lastJoystick) {
-                    lastJoystick = ckey;
-                    if (key != 10) {
-                        control.raiseEvent(joystickEventID, lastJoystick);
-                    }
-                    else {
-                        control.raiseEvent(joystickEventID, 10);
-                    }
-                }
-                basic.pause(30);
-            }
-        })
-
+    export function onJoystick(key: GroveJoystickKey, handler: (handlerArg: string) => void) {
+        /*   control.onEvent(joystickEventID, key, handler(1));
+           control.inBackground(() => {
+               while (true) {
+                   const ckey = joystick.read();
+                   if (ckey != lastJoystick) {
+                       lastJoystick = ckey;
+                       if (key != 10) {
+                           control.raiseEvent(joystickEventID, lastJoystick);
+                       }
+                       else {
+                           control.raiseEvent(joystickEventID, 10);
+                       }
+                   }
+                   basic.pause(30);
+               }
+           })
+         */
     }
 
 
