@@ -457,16 +457,15 @@ namespace grove {
      * @param handler code to run
      */
     //% blockId=grove_rotary_create_event block="on Rotary |%PinIn | trigger"
-    //% PinIn.defl = P0
+    //% PinIn.defl = P1
     //% group=Rotary
     export function onRotary(PinIn: AnalogPin, handler: () => void) {
-        let r = new GroveRotary();
-        r.Pin = PinIn;
-        control.onEvent(rotaryEventID, r.read(), handler);
+        rotary.Pin = PinIn;
+        control.onEvent(rotaryEventID, rotary.read(), handler);
         control.inBackground(() => {
             while (true) {
-                const value = r.read();
-                if (Math.abs(value - lastRotary)>30) {
+                const value = rotary.read();
+                if (Math.abs(value - lastRotary)>10) {
                       lastRotary = value;
                       control.raiseEvent(rotaryEventID, lastRotary);
                     }
