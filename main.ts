@@ -571,8 +571,8 @@ namespace grove {
     //% block="on Joystick $key"
     //% draggableParameters
     //% group=Joystick
-    export function onJoystick(key : number, handler: () => void) {
-        control.onEvent(joystickEventID, 0, handler);
+    export function onJoystick(handler: (key : number) => void) {
+        //control.onEvent(joystickEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
                 const ckey = joystick.read();
