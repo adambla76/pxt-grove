@@ -432,6 +432,33 @@ namespace grove {
         }
     }
 
+    export class GroveLedButton {
+        ButtonPin: DigitalPin;
+        LedPin: DigitalPin;
+        _state : boolean;
+        
+        constructor() {
+            this._state = false;
+        }
+        
+        State(): boolean {
+            let vol = pins.digitalReadPin(this.ButtonPin);
+            basic.pause(200);
+            if(vol==1) {
+                this._state = !this._state;
+                if(this._state) {
+                   pins.digitalWritePin(this.LedPin, 1)
+                }
+                else {
+                   pins.digitalWritePin(this.LedPin, 0)
+                }
+            }    
+            return this._state;
+        }
+
+    }
+
+
     const gestureEventId = 3100;
     const joystickEventID = 3101;
     const rotaryEventID = 3102;
@@ -441,6 +468,8 @@ namespace grove {
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
+    let ledbutton = new GroveLedButton();
+
     let paj7620 = new PAJ7620();
 
 
@@ -492,6 +521,22 @@ namespace grove {
 
         })
 
+    }
+
+
+    /**
+         * Create a new driver Grove LedButton
+         * @param ButtonPin
+         * @param LedPin 
+    */
+    //% blockId=grove_ledbutton_state block="Button at|%ButtonPin| led | %LedButton"
+    //% ButtonPin.defl = P0
+    //% LedPin.defl = P14
+    //% group="Led Button"
+    export function LedButton(ButtonPin: DigitalPin, LedPin: DigitalPin): boolean {
+        ledbutton.ButtonPin = ButtonPin;
+        ledbutton.LedPin = LedPin;
+        return ledbutton._state;
     }
 
 
