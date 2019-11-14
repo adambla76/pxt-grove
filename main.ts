@@ -419,9 +419,9 @@ namespace grove {
     }
 
     export class GroveRotary {
-        Pin : AnalogPin;
-        
-        read() : number {
+        Pin: AnalogPin;
+
+        read(): number {
             let value = pins.analogReadPin(this.Pin);
             return value;
         }
@@ -432,7 +432,7 @@ namespace grove {
     const rotaryEventID = 3102;
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
-    let lastRotary : number = 0;
+    let lastRotary: number = 0;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
@@ -461,20 +461,21 @@ namespace grove {
     //% group=Rotary
     export function onRotary(PinIn: AnalogPin, handler: () => void) {
         rotary.Pin = PinIn;
-        control.onEvent(rotaryEventID, rotary.read(), handler);
+        control.onEvent(rotaryEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
                 const value = rotary.read();
-                if (Math.abs(value - lastRotary)>10) {
-                      lastRotary = value;
-                      control.raiseEvent(rotaryEventID, lastRotary);
-                    }
+                if (Math.abs(value - lastRotary) > 30) {
+                    lastRotary = value;
+                    control.raiseEvent(rotaryEventID, 0);
                 }
-                basic.pause(1000);
-                basic.showNumber(lastRotary);
-            })
+                basic.pause(30);
+            }
+
+        })
 
     }
+
 
     /**
      * Create a new driver Grove - Thumb Joystick
