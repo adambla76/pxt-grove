@@ -570,10 +570,10 @@ namespace grove {
      * @param key type of joystick to detect
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on |%key key $handlerArg"
+    //% blockId=grove_joystick_create_event block="on Joystick |%key"
     //% draggableParameters
     //% group=Joystick
-    export function onJoystick(key: GroveJoystickKey, handler: (handlerArg: string) => void) {
+    export function onJoystick(handler: (key: GroveJoystickKey) => void) {
         /*   control.onEvent(joystickEventID, key, handler(1));
            control.inBackground(() => {
                while (true) {
