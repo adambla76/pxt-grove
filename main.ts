@@ -432,6 +432,7 @@ namespace grove {
     const rotaryEventID = 3102;
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
+    let lastRotary : number = 0;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
@@ -450,6 +451,29 @@ namespace grove {
         return rotary.read();
     }
 
+    /**
+     * Do something when a key is detected by Grove - Thumb Joystick
+     * @param key type of joystick to detect
+     * @param handler code to run
+     */
+    //% blockId=grove_joystick_create_event block="on |%key"
+    //% group=Joystick
+    export function onRotary(PinIn: AnalogPin, handler: () => void) {
+        let r = new GroveRotary();
+        r.Pin = PinIn;
+        control.onEvent(rotaryEventID, lastRotary, handler);
+        control.inBackground(() => {
+            while (true) {
+                const value = r.read();
+                if (Math.abs(value - lastRotary)>30) {
+                      lastRotary = value;
+                      control.raiseEvent(joystickEventID, lastRotary);
+                    }
+                }
+                basic.pause(30);
+            })
+
+    }
 
     /**
      * Create a new driver Grove - Thumb Joystick
