@@ -465,7 +465,7 @@ namespace grove {
     //% group=Rotary
     export function RotaryPercent(PinIn: AnalogPin): number {
         rotary.Pin = PinIn;
-        return rotary.read();
+        return rotary.percent();
     }
 
 
