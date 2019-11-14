@@ -418,13 +418,37 @@ namespace grove {
         }
     }
 
+    export class GroveRotary {
+        Pin : AnalogPin;
+        
+        read() : number {
+            let value = pins.analogReadPin(this.Pin);
+            return value;
+        }
+    }
+
     const gestureEventId = 3100;
     const joystickEventID = 3101;
+    const rotaryEventID = 3102;
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
+    let rotary = new GroveRotary();
     let paj7620 = new PAJ7620();
+
+
+    /**
+         * Create a new driver Grove Rotary
+         * @param pin 
+    */
+    //% blockId=grove_rotary_create block="Rotary at|%Pin"
+    //% Pin.defl = P0
+    //% group=Rotary
+    export function Rotary(PinIn: AnalogPin): number {
+        rotary.Pin = PinIn;
+        return rotary.read();
+    }
 
 
     /**
