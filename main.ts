@@ -470,7 +470,8 @@ namespace grove {
                       control.raiseEvent(rotaryEventID, lastRotary);
                     }
                 }
-                basic.pause(30);
+                basic.pause(1000);
+                basic.showNumber(lastRotary);
             })
 
     }
