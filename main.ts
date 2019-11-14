@@ -462,13 +462,13 @@ namespace grove {
     export function onRotary(PinIn: AnalogPin, handler: () => void) {
         let r = new GroveRotary();
         r.Pin = PinIn;
-        control.onEvent(rotaryEventID, lastRotary, handler);
+        control.onEvent(rotaryEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
                 const value = r.read();
                 if (Math.abs(value - lastRotary)>30) {
                       lastRotary = value;
-                      control.raiseEvent(rotaryEventID, lastRotary);
+                      control.raiseEvent(rotaryEventID, 0);
                     }
                 }
                 basic.pause(10);
