@@ -425,6 +425,11 @@ namespace grove {
             let value = pins.analogReadPin(this.Pin);
             return value;
         }
+
+        percent() : number {
+            let value = this.read();
+            return Math.round(100 * (value / 1023));
+        }
     }
 
     const gestureEventId = 3100;
@@ -440,16 +445,29 @@ namespace grove {
 
 
     /**
-         * Create a new driver Grove Rotary
-         * @param pin 
+         * Create a new driver Grove Rotary & get rotary value
+         * @param PinIn 
     */
-    //% blockId=grove_rotary_create block="Rotary at|%PinIn"
+    //% blockId=grove_rotary_raw block="Rotary at|%PinIn Value"
     //% PinIn.defl = P0
     //% group=Rotary
-    export function Rotary(PinIn: AnalogPin): number {
+    export function RotaryValue(PinIn: AnalogPin): number {
         rotary.Pin = PinIn;
         return rotary.read();
     }
+
+    /**
+         * Create a new driver Grove Rotary & get rotary percentage value
+         * @param PinIn 
+    */
+    //% blockId=grove_rotary_percent block="Rotary at|%PinIn Percent"
+    //% PinIn.defl = P0
+    //% group=Rotary
+    export function RotaryPercent(PinIn: AnalogPin): number {
+        rotary.Pin = PinIn;
+        return rotary.read();
+    }
+
 
     /**
      * Do something when a key is detected by Grove - Thumb Joystick
@@ -461,13 +479,13 @@ namespace grove {
     //% group=Rotary
     export function onRotary(PinIn: AnalogPin, handler: () => void) {
         rotary.Pin = PinIn;
-        control.onEvent(rotaryEventID, 0, handler);
+        control.onEvent(rotaryEventID, PinIn, handler);
         control.inBackground(() => {
             while (true) {
                 const value = rotary.read();
-                if (Math.abs(value - lastRotary) > 30) {
+                if (Math.abs(value - lastRotary) > 10) {
                     lastRotary = value;
-                    control.raiseEvent(rotaryEventID, 0);
+                    control.raiseEvent(rotaryEventID, PinIn);
                 }
                 basic.pause(30);
             }
