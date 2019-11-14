@@ -571,11 +571,15 @@ namespace grove {
     //% block="on Joystick $key"
     //% draggableParameters
     //% group=Joystick
-    export function onJoystick(h: (key: GroveJoystickKey) => void) {
-            control.onEvent(joystickEventID, 0, () => {
-            const key = joystick.read();
-            control.raiseEvent(joystickEventID, 0);
-            })
+    export function onJoystick(handler: (key: GroveJoystickKey) => void) {
+            basic.showIcon(IconNames.Heart);
+/*            control.onEvent(joystickEventID, 0, () => {
+            while(true) {
+              const key = joystick.read();
+              control.raiseEvent(joystickEventID, 0);
+              basic.pause(100);
+            }*/  
+            
 
     }
 
