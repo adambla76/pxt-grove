@@ -444,7 +444,7 @@ namespace grove {
         State(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
             //basic.pause(200);
-            if(vol==1) {
+            if(vol==0) {
                 this._state = !this._state;
                 if(this._state) {
                    pins.digitalWritePin(this.LedPin, 1)
@@ -528,9 +528,9 @@ namespace grove {
          * @param ButtonPin
          * @param LedPin 
     */
-    //% blockId=grove_ledbutton_state block="Button at|%ButtonPin| led | %LedPin"
-    //% ButtonPin.defl = P2
-    //% LedPin.defl = P16
+    //% blockId=grove_ledbutton_state block="Led at| %LedPin | Button |%ButtonPin"
+    //% ButtonPin.defl = P16
+    //% LedPin.defl = P2
     //% group="Led Button"
     export function LedButton(ButtonPin: DigitalPin, LedPin: DigitalPin): boolean {
         ledbutton.ButtonPin = ButtonPin;
