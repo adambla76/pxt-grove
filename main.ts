@@ -468,10 +468,10 @@ namespace grove {
                 const value = r.read();
                 if (Math.abs(value - lastRotary)>30) {
                       lastRotary = value;
-                      control.raiseEvent(joystickEventID, lastRotary);
+                      control.raiseEvent(rotaryEventID, lastRotary);
                     }
                 }
-                basic.pause(30);
+                basic.pause(10);
             })
 
     }
