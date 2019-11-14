@@ -469,7 +469,6 @@ namespace grove {
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
     let ledbutton = new GroveLedButton();
-
     let paj7620 = new PAJ7620();
 
 
@@ -529,9 +528,9 @@ namespace grove {
          * @param ButtonPin
          * @param LedPin 
     */
-    //% blockId=grove_ledbutton_state block="Button at|%ButtonPin| led | %LedButton"
-    //% ButtonPin.defl = P0
-    //% LedPin.defl = P14
+    //% blockId=grove_ledbutton_state block="Button at|%ButtonPin| led | %LedPin"
+    //% ButtonPin.defl = P2
+    //% LedPin.defl = P16
     //% group="Led Button"
     export function LedButton(ButtonPin: DigitalPin, LedPin: DigitalPin): boolean {
         ledbutton.ButtonPin = ButtonPin;
