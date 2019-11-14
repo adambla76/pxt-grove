@@ -536,7 +536,7 @@ namespace grove {
     export function LedButton(ButtonPin: DigitalPin, LedPin: DigitalPin): boolean {
         ledbutton.ButtonPin = ButtonPin;
         ledbutton.LedPin = LedPin;
-        return ledbutton._state;
+        return ledbutton.State();
     }
 
 
