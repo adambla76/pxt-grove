@@ -443,8 +443,8 @@ namespace grove {
          * Create a new driver Grove Rotary
          * @param pin 
     */
-    //% blockId=grove_rotary_create block="Rotary at|%Pin"
-    //% Pin.defl = P0
+    //% blockId=grove_rotary_create block="Rotary at|%PinIn"
+    //% PinIn.defl = P0
     //% group=Rotary
     export function Rotary(PinIn: AnalogPin): number {
         rotary.Pin = PinIn;
@@ -456,8 +456,9 @@ namespace grove {
      * @param key type of joystick to detect
      * @param handler code to run
      */
-    //% blockId=grove_joystick_create_event block="on |%key"
-    //% group=Joystick
+    //% blockId=grove_rotary_create_event block="on Rotary |%PinIn | trigger"
+    //% PinIn.defl = P0
+    //% group=Rotary
     export function onRotary(PinIn: AnalogPin, handler: () => void) {
         let r = new GroveRotary();
         r.Pin = PinIn;
