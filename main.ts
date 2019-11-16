@@ -464,9 +464,12 @@ namespace grove {
     const gestureEventId = 3100;
     const joystickEventID = 3101;
     const rotaryEventID = 3102;
+    const ledbuttonEventID = 3103;
+
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let lastRotary: number = 0;
+    let lastLedButton: boolean = false;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
@@ -550,6 +553,27 @@ namespace grove {
     //% group="Led Button"
     export function IsButtonPressed(): boolean {
          return ledbutton.State();
+    }
+
+    /**
+         * Do something when a button was pressed by Grove LedButton
+         * @param handler code to run
+         */
+    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed"
+    //% group=Led Button
+    export function onLedButton(handler: () => void) {
+        control.onEvent(ledbuttonEventID, 0, handler);
+        control.inBackground(() => {
+            while (true) {
+                const vol = ledbutton.State();
+                if (vol != lastLedButton) {
+                    lastLedButton = vol;
+                        control.raiseEvent(ledbuttonEventID, 0);
+                    }
+                basic.pause(30);
+                }
+        })
+
     }
 
 
