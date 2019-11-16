@@ -568,7 +568,8 @@ namespace grove {
                 const vol = ledbutton.State();
                 if (vol != lastLedButton) {
                     lastLedButton = vol;
-                        control.raiseEvent(ledbuttonEventID, 0);
+                       basic.pause(200);
+                       control.raiseEvent(ledbuttonEventID, 0);
                     }
                 basic.pause(30);
                 }
