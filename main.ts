@@ -93,6 +93,13 @@ declare const enum FanStatus {
     Low = 2,
 }
 
+declare const enum LedButtonMode {
+    //% block=light
+    Light = 1,
+    //% block=blink
+    Blink = 2,
+}
+
 enum DHTtype {
     //% block="DHT11"
     DHT11,
@@ -533,12 +540,11 @@ namespace grove {
              * @param LedPin 
              * @param Mode
     */
-    //% blockId=grove_init_button block="Button at| %ButtonPin | Led |%LedPin Mode|%Mode"
+    //% blockId=grove_init_button block="Button at| %ButtonPin | Led |%LedPin Mode|$Mode"
     //% ButtonPin.defl = P16
     //% LedPin.defl = P0
-    //% Mode.defl = 0
     //% group="Led Button"
-    export function InitButton(ButtonPin: DigitalPin, LedPin: DigitalPin, Mode: number): void {
+    export function InitButton(ButtonPin: DigitalPin, LedPin: DigitalPin, Mode: LedButtonMode): void {
         ledbutton.ButtonPin = ButtonPin;
         ledbutton.LedPin = LedPin;
         ledbutton._mode = Mode;
@@ -559,8 +565,8 @@ namespace grove {
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
          */
-    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed"
-    //% group=Led Button
+    //% blockId=grove_ledbutton_create_event block="on LedButton"
+    //% group="Led Button"
     export function onLedButton(handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
