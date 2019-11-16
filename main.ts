@@ -435,10 +435,12 @@ namespace grove {
     export class GroveLedButton {
         ButtonPin: DigitalPin;
         LedPin: DigitalPin;
+        _mode: number;
         _state: boolean;
 
         constructor() {
             this._state = false;
+            this._mode = 0;
         }
 
         State(): boolean {
@@ -446,7 +448,6 @@ namespace grove {
 
             if (vol == 0) {
                 this._state = !this._state;
-                //basic.pause(20);
                 if (this._state) {
                     pins.digitalWritePin(this.LedPin, 1)
                 }
@@ -523,20 +524,32 @@ namespace grove {
 
     }
 
-
     /**
-         * Create a new driver Grove LedButton
-         * @param ButtonPin
-         * @param LedPin 
+             * Create a new driver Grove LedButton
+             * @param ButtonPin
+             * @param LedPin 
+             * @param Mode
     */
-    //% blockId=grove_ledbutton_state block="Button at| %ButtonPin | Led |%LedPin"
+    //% blockId=grove_init_button block="Button at| %ButtonPin | Led |%LedPin Mode|%Mode"
     //% ButtonPin.defl = P16
     //% LedPin.defl = P0
+    //% Mode.defl = 0
     //% group="Led Button"
-    export function LedButton(ButtonPin: DigitalPin, LedPin: DigitalPin): boolean {
+    export function InitButton(ButtonPin: DigitalPin, LedPin: DigitalPin, Mode: number): void {
         ledbutton.ButtonPin = ButtonPin;
         ledbutton.LedPin = LedPin;
-        return ledbutton.State();
+        ledbutton._mode = Mode;
+    }
+
+
+
+    /**
+     * Get state of Grove LedButton
+     */
+    //% blockId=grove_IsButton_state block="Is Button Pressed"
+    //% group="Led Button"
+    export function IsButtonPressed(): boolean {
+         return ledbutton.State();
     }
 
 
