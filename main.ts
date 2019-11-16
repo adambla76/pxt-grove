@@ -461,6 +461,7 @@ namespace grove {
                 else {
                     pins.digitalWritePin(this.LedPin, 0)
                 }
+                basic.pause(200);
             }
             return this._state;
         }
@@ -574,9 +575,9 @@ namespace grove {
                 const vol = ledbutton.State();
                 if (vol != lastLedButton) {
                     lastLedButton = vol;
-                       basic.pause(200);
-                       control.raiseEvent(ledbuttonEventID, 0);
-                    }
+                    //basic.pause(200);
+                    control.raiseEvent(ledbuttonEventID, 0);
+                }
                 basic.pause(30);
                 }
         })
