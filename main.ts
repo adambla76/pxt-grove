@@ -443,10 +443,10 @@ namespace grove {
 
         State(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
-            
+
             if (vol == 0) {
                 this._state = !this._state;
-                basic.pause(100);
+                basic.pause(20);
                 if (this._state) {
                     pins.digitalWritePin(this.LedPin, 1)
                 }
