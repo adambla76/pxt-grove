@@ -564,25 +564,32 @@ namespace grove {
         return joystick.read();
     }
 
-
     /**
-     * Do something when move is detected by Grove - Thumb Joystick
-     */
-    //% block="on Joystick $key"
-    //% draggableParameters
+         * Do something when a key is detected by Grove - Thumb Joystick
+         * @param key type of joystick to detect
+         * @param handler code to run
+         */
+    //% blockId=grove_joystick_create_event block="on |%key"
     //% group=Joystick
-    export function onJoystick(handler: (key: GroveJoystickKey) => void) {
-            basic.showIcon(IconNames.Heart);
-/*            control.onEvent(joystickEventID, 0, () => {
-            while(true) {
-              const key = joystick.read();
-              control.raiseEvent(joystickEventID, 0);
-              basic.pause(100);
-            }*/  
-            
+    export function onJoystick(key: GroveJoystickKey, handler: () => void) {
+        control.onEvent(joystickEventID, key, handler);
+        control.inBackground(() => {
+            while (true) {
+                const ckey = joystick.read();
+                if (ckey != lastJoystick) {
+                    lastJoystick = ckey;
+                    if (key != 10) {
+                        control.raiseEvent(joystickEventID, lastJoystick);
+                    }
+                    else {
+                        control.raiseEvent(joystickEventID, 10);
+                    }
+                }
+                basic.pause(30);
+            }
+        })
 
     }
-
 
     /**
      * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
