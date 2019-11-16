@@ -461,7 +461,7 @@ namespace grove {
                 else {
                     pins.digitalWritePin(this.LedPin, 0)
                 }
-                basic.pause(200);
+                basic.pause(1000);
             }
             return this._state;
         }
