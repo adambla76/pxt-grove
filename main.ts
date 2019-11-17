@@ -464,12 +464,13 @@ namespace grove {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if(vol==0) {
                 this.StateToggle();
+                basic.pause(200);
             }
             return this._state;
         }
 
         StateToggle(): void {
-           this._state != this._state; 
+            this._state ? this._state = false : this._state = true; 
         }
 
 
@@ -484,7 +485,7 @@ namespace grove {
         }
 
         LedToggle(): void {
-            this._ledstate != this._ledstate;
+            this._ledstate ? this._ledstate = false : this._ledstate = true;  
             if(this._ledstate) {
                 pins.digitalWritePin(this.LedPin, 1);
             }
@@ -608,36 +609,12 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
-                let vol = ledbutton.CheckState();
-                if(vol) {
-                  basic.showIcon(IconNames.Happy);
-                }
-                else {
-                  basic.showIcon(IconNames.Sad);  
-                }
-                basic.pause(500);
-                control.raiseEvent(ledbuttonEventID, 0);
-
-
-
-/*
-                if (vol != lastLedButton) {
-                    basic.showIcon(IconNames.Heart);
+                const vol = ledbutton.CheckState();
+                if(vol != lastLedButton) {
                     lastLedButton = vol;
-                    basic.pause(200);
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
-                /*
-                if(blink) {
-                    ledbutton.LedToggle();
-                }
-                else {
-                    ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
-                    }
-                
-                ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
-
-                basic.pause(50); */
+                basic.pause(50);
             }
         })
 
