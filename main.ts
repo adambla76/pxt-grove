@@ -598,6 +598,7 @@ namespace grove {
         
         control.inBackground(() => {
             while (true) {
+                ledbutton.CheckState();
                 if (ledbutton._state) {
                     if (ledbutton.Blink) {
                         ledbutton.LedToggle();
