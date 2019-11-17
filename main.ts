@@ -452,12 +452,14 @@ namespace grove {
     export class GroveLedButton {
         ButtonPin: DigitalPin;
         LedPin: DigitalPin;
+        Blink: boolean;
         _ledstate : boolean;
         _state: boolean;
 
         constructor() {
             this._state = false;
             this._ledstate = false;
+            this.Blink = false;
         }
 
         CheckState(): boolean {
@@ -567,11 +569,12 @@ namespace grove {
              * Create a new driver Grove LedButton
              * @param ButtonPin
              * @param LedPin 
-             * @param Mode
+             * @param Blink
     */
-    //% blockId=grove_init_button block="LedButton at| %ButtonPin"
+    //% blockId=grove_init_button block="LedButton at| %ButtonPin | Blink $blink"
+    //% blink.defl = false
     //% group="Led Button"
-    export function InitButton(ButtonPin: LedButtonPin): void {
+    export function InitButton(ButtonPin: LedButtonPin, blink : boolean = false): void {
         if (ButtonPin == LedButtonPin.P14) {
             ledbutton.ButtonPin = DigitalPin.P14;
             ledbutton.LedPin = DigitalPin.P0;
@@ -584,6 +587,7 @@ namespace grove {
             ledbutton.ButtonPin = DigitalPin.P16;
             ledbutton.LedPin = DigitalPin.P2;
         }
+        ledbutton.Blink = blink 
     }
 
 
@@ -600,13 +604,10 @@ namespace grove {
     /**
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
-         * @param flashing
          */
-    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed | Blinking|$blink"
-    //% blink.shadow="toggleYesNo"
-    //% blink.defl = false
+    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed"
     //% group="Led Button"
-    export function onLedButton(blink: boolean = false, handler: () => void) {
+    export function onLedButton(handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
@@ -616,7 +617,7 @@ namespace grove {
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
                 if(vol) {
-                    if(blink) {
+                    if(ledbutton.Blink) {
                         ledbutton.LedToggle();    
                     }
                     else {
@@ -626,7 +627,7 @@ namespace grove {
                 else {
                     ledbutton.LedOff();
                 }    
-                basic.pause(50);
+                basic.pause(100);
             }
         })
 
