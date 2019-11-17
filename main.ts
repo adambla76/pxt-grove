@@ -471,13 +471,16 @@ namespace grove {
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
         //% parts="Grove"
         //% group="Led Button"
-        CheckState(): boolean {
+        GetState(): boolean {
+            return this._state;
+        }
+
+        UpdateState(): void {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if (vol == 0) {
                 this._state ? this._state = false : this._state = true;
-                //basic.pause(50);
+                basic.pause(150);
             }
-            return this._state;
         }
 
         LedOn(): void {
@@ -598,7 +601,7 @@ namespace grove {
         
         control.inBackground(() => {
             while (true) {
-                ledbutton.CheckState();
+                ledbutton.UpdateState();
                 if (ledbutton._state) {
                     if (ledbutton.Blink) {
                         ledbutton.LedToggle();
@@ -628,7 +631,7 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
-                const state = ledbutton.CheckState();
+                const state = ledbutton.GetState();
                 if (state != ledbutton._laststate) {
                     ledbutton._laststate = state;
                     control.raiseEvent(ledbuttonEventID, 0);
