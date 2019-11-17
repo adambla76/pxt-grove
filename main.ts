@@ -471,8 +471,8 @@ namespace grove {
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
         //% parts="Grove"
         //% group="Led Button"
-        GetButtonState(ledbutton: GroveLedButton): boolean {
-            return ledbutton._state;
+        GetButtonState(): boolean {
+            return this._state;
         }
 
         CheckState(): boolean {
