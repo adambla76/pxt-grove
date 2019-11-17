@@ -475,7 +475,7 @@ namespace grove {
         }
 
         StateToggle(): void {
-            this._state != this._state
+            this._state ? this._state = false : this._state = true; 
         }
 
 
@@ -496,7 +496,7 @@ namespace grove {
             else {
                 pins.digitalWritePin(this.LedPin, 0);
             }
-            this._ledstate = !this._ledstate;
+            this._ledstate ? this._ledstate = false : this._ledstate = true;
         }
 
     }
