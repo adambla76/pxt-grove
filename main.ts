@@ -498,11 +498,11 @@ namespace grove {
                 this.LedOn();
             }
             else {
-                this.LedOff()    
+                this.LedOff()
             }
             this._ledstate ? this._ledstate = false : this._ledstate = true;
         }
-    
+
 
     }
 
@@ -604,7 +604,7 @@ namespace grove {
             while (true) {
                 ledbutton.UpdateState();
                 if (ledbutton.GetButtonState()) {
-                    if (ledbutton.Blink==true) {
+                    if (ledbutton.Blink == true) {
                         ledbutton.LedToggle();
                     }
                     else {
@@ -627,22 +627,23 @@ namespace grove {
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
          */
-    //% blockId=grove_ledbutton_create_event block="LedButton on | %ButtonPin | Changed"
+    //% blockId=grove_ledbutton_create_event block="on LedButton | %ButtonPin | Changed"
+    //% ButtonPin.shadow="LedButtonPin"
     //% parts="Grove"
     //% group="Led Button"
-    export function onLedButton(ButtonPin: DigitalPin, handler: () => void){
+    export function onLedButton(ButtonPin: DigitalPin, handler: () => void) {
         control.onEvent(ledbuttonEventID, ButtonPin, handler);
         control.inBackground(() => {
             let last = 1
             while (true) {
-             let v = pins.digitalReadPin(ButtonPin);
+                let v = pins.digitalReadPin(ButtonPin);
                 if (last != v) {
                     last = v;
                     control.raiseEvent(ledbuttonEventID, ButtonPin);
                 }
                 basic.pause(50);
             }
-        }) 
+        })
 
     }
 
