@@ -93,7 +93,9 @@
     // display.set(7);
     // let p : grove.PAJ7620;
     // p.init();
-
+    
+    
+    
     while (true) {
         //     display.show(data ++);
         //     let distance = grove.measureInCentimeters(DigitalPin.P0);

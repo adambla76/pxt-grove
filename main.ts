@@ -614,12 +614,16 @@ namespace grove {
                     basic.pause(200);
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
+                /*
                 if(blink) {
                     ledbutton.LedToggle();
                 }
                 else {
                     ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
                     }
+                */
+                ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
+
                 basic.pause(50);
             }
         })
