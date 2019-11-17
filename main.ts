@@ -597,11 +597,11 @@ namespace grove {
             ledbutton.ButtonPin = DigitalPin.P16;
             ledbutton.LedPin = DigitalPin.P2;
         }
-        ledbutton.Blink = false
+        ledbutton.Blink = blink;
 
         control.inBackground(() => {
             while (true) {
-                ledbutton.UpdateState();
+                //ledbutton.UpdateState();
                 if (ledbutton.GetButtonState()) {
                     if (ledbutton.Blink==true) {
                         ledbutton.LedToggle();
