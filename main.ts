@@ -614,6 +614,7 @@ namespace grove {
                     ledbutton.LedOff();
                 }
                 basic.pause(100);
+                basic.showIcon(IconNames.Heart);
             }
         })
 
