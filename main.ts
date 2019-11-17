@@ -611,7 +611,7 @@ namespace grove {
                 const vol = ledbutton.CheckState();
                 if (vol != lastLedButton) {
                     lastLedButton = vol;
-                    //basic.pause(200);
+                    basic.pause(200);
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
                 if(blink) {
@@ -620,7 +620,7 @@ namespace grove {
                 else {
                     ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
                     }
-                basic.pause(250);
+                basic.pause(50);
             }
         })
 
