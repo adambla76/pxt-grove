@@ -502,6 +502,26 @@ namespace grove {
             }
             this._ledstate ? this._ledstate = false : this._ledstate = true;
         }
+    
+        /**
+        * Do something when a button was pressed by Grove LedButton
+        * @param handler code to run
+        */
+        //% blockId=grove_ledbutton_create_event block="on %ledbutton Pressed"
+        //% parts="Grove"
+        //% group="Led Button"
+        onLedButton(handler: () => void) {
+            control.onEvent(ledbuttonEventID, this.ButtonPin, handler);
+            control.inBackground(() => {
+                while (true) {
+                    if (this._state != this._laststate) {
+                        this._laststate = this._state;
+                        control.raiseEvent(ledbuttonEventID, this.ButtonPin);
+                    }
+                }
+            })
+        }
+
 
     }
 
@@ -626,10 +646,10 @@ namespace grove {
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
          */
-    //% blockId=grove_ledbutton_create_event block="on %ledbutton Pressed"
+    //% blockId=grove_ledbutton_create_event_old block="on %ledbutton Pressed"
     //% parts="Grove"
     //% group="Led Button"
-    export function onLedButton(ledbutton: GroveLedButton, handler: () => void) {
+    export function onLedButton_old(ledbutton: GroveLedButton, handler: () => void) {
         control.onEvent(ledbuttonEventID, ledbutton.ButtonPin, handler);
         control.inBackground(() => {
             while (true) {
