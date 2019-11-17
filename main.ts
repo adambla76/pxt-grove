@@ -608,6 +608,7 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
+                basic.showIcon(IconNames.Heart);
                 const vol = ledbutton.CheckState();
                 if (vol != lastLedButton) {
                     lastLedButton = vol;
