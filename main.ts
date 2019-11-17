@@ -595,9 +595,25 @@ namespace grove {
             ledbutton.LedPin = DigitalPin.P2;
         }
         ledbutton.Blink = blink
+        
+        control.inBackground(() => {
+            while (true) {
+                if (ledbutton._state) {
+                    if (ledbutton.Blink) {
+                        ledbutton.LedToggle();
+                    }
+                    else {
+                        ledbutton.LedOn();
+                    }
+                }
+                else {
+                    ledbutton.LedOff();
+                }
+                basic.pause(100);
+            }
+        })
         return ledbutton;
     }
-
 
 
     /**
