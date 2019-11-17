@@ -602,10 +602,9 @@ namespace grove {
          * @param handler code to run
          * @param flashing
          */
-    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed || Blinking|$blink"
+    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed | Blinking|$blink"
     //% blink.shadow="toggleYesNo"
     //% blink.defl = false
-    //  expandableArgumentMode="toggle"
     //% group="Led Button"
     export function onLedButton(blink: boolean = false, handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
