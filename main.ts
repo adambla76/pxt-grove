@@ -491,12 +491,12 @@ namespace grove {
 
         LedToggle(): void {
             if (this._ledstate) {
-                this._ledstate = !this._ledstate;
                 pins.digitalWritePin(this.LedPin, 1);
             }
             else {
                 pins.digitalWritePin(this.LedPin, 0);
             }
+            this._ledstate = !this._ledstate;
         }
 
     }
