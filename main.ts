@@ -590,9 +590,9 @@ namespace grove {
     /**
      * Get state of Grove LedButton
      */
-    //% blockId=grove_IsButton_state block="Is Button Pressed"
+    //% blockId=grove_IsButton_state block="Is Button Activated"
     //% group="Led Button"
-    export function IsButtonPressed(): boolean {
+    export function GetButtonState(): boolean {
         return ledbutton._state;
     }
 
@@ -609,6 +609,18 @@ namespace grove {
         control.inBackground(() => {
             while (true) {
                 const vol = ledbutton.CheckState();
+                if(vol) {
+                  basic.showIcon(IconNames.Happy);
+                }
+                else {
+                  basic.showIcon(IconNames.Sad);  
+                }
+                basic.pause(500);
+                control.raiseEvent(ledbuttonEventID, 0);
+
+
+
+/*
                 if (vol != lastLedButton) {
                     basic.showIcon(IconNames.Heart);
                     lastLedButton = vol;
@@ -622,10 +634,10 @@ namespace grove {
                 else {
                     ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
                     }
-                */
+                
                 ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
 
-                basic.pause(50);
+                basic.pause(50); */
             }
         })
 
