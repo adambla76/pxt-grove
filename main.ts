@@ -474,16 +474,11 @@ namespace grove {
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if (vol == 0) {
-                this.StateToggle();
-                basic.pause(300);
+                this._state ? this._state = false : this._state = true;
+                basic.pause(50);
             }
             return this._state;
         }
-
-        StateToggle(): void {
-            this._state ? this._state = false : this._state = true;
-        }
-
 
         LedOn(): void {
             this._ledstate = true;
@@ -497,10 +492,10 @@ namespace grove {
 
         LedToggle(): void {
             if (this._ledstate) {
-                pins.digitalWritePin(this.LedPin, 1);
+                this.LedOn();
             }
             else {
-                pins.digitalWritePin(this.LedPin, 0);
+                this.LedOff()    
             }
             this._ledstate ? this._ledstate = false : this._ledstate = true;
         }
@@ -610,6 +605,7 @@ namespace grove {
          * @param handler code to run
          */
     //% blockId=grove_ledbutton_create_event block="on %ledbutton Pressed"
+    //% parts="Grove"
     //% group="Led Button"
     export function onLedButton(ledbutton: GroveLedButton, handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
