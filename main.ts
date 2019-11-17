@@ -475,7 +475,7 @@ namespace grove {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if (vol == 0) {
                 this._state ? this._state = false : this._state = true;
-                basic.pause(50);
+                //basic.pause(50);
             }
             return this._state;
         }
