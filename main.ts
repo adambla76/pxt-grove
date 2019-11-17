@@ -602,7 +602,7 @@ namespace grove {
         control.inBackground(() => {
             while (true) {
                 ledbutton.UpdateState();
-                if (ledbutton._state) {
+                if (ledbutton.GetState()) {
                     if (ledbutton.Blink) {
                         ledbutton.LedToggle();
                     }
