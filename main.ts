@@ -613,7 +613,7 @@ namespace grove {
                 else {
                     ledbutton.LedOff();
                 }
-                basic.pause(100);
+                basic.pause(250);
             }
         })
 
