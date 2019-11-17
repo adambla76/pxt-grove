@@ -491,6 +491,15 @@ namespace grove {
             this.Blink = blink
         }
 
+        /**
+         * Get state of Grove LedButton
+         */
+        //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
+        //% group="Led Button"
+        GetState(): boolean {
+          return this._state;
+        }
+
 
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
