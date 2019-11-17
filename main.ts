@@ -475,7 +475,7 @@ namespace grove {
         }
 
         StateToggle(): void {
-            this._state ? this._state = false : this._state = true;
+            this._state != this._state
         }
 
 
