@@ -465,16 +465,15 @@ namespace grove {
             this.Blink = false;
         }
 
-
         /**
          * Get state of Grove LedButton
          */
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
+        //% parts="Grove"
         //% group="Led Button"
-        GetState(): boolean {
-          return this._state;
+        GetButtonState(ledbutton: GroveLedButton): boolean {
+            return ledbutton._state;
         }
-
 
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
@@ -524,7 +523,7 @@ namespace grove {
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
-//    let ledbutton = new GroveLedButton();
+    //    let ledbutton = new GroveLedButton();
     let paj7620 = new PAJ7620();
 
 
@@ -609,15 +608,6 @@ namespace grove {
     }
 
 
-
-    /**
-     * Get state of Grove LedButton
-     */
-    //% blockId=grove_IsButton_state block="%ledbutton Is Activated"
-    //% group="Led Button"
-    export function GetButtonState(ledbutton: GroveLedButton): boolean {
-        return ledbutton._state;
-    }
 
     /**
          * Do something when a button was pressed by Grove LedButton
