@@ -597,7 +597,7 @@ namespace grove {
             ledbutton.ButtonPin = DigitalPin.P16;
             ledbutton.LedPin = DigitalPin.P2;
         }
-        ledbutton.Blink = blink
+        ledbutton.Blink = false
 
         control.inBackground(() => {
             while (true) {
