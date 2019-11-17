@@ -100,6 +100,16 @@ declare const enum LedButtonMode {
     Blink = 2,
 }
 
+declare const enum LedButtonPin {
+    //% block=P14
+    P14 = DigitalPin.P14,
+    //% block=P15
+    P15 = DigitalPin.P15,
+    //% block=P16
+    P16 = DigitalPin.P16,
+}
+
+
 enum DHTtype {
     //% block="DHT11"
     DHT11,
@@ -541,14 +551,21 @@ namespace grove {
              * @param LedPin 
              * @param Mode
     */
-    //% blockId=grove_init_button block="Button at| %ButtonPin | Led |%LedPin Mode|$Mode"
-    //% ButtonPin.defl = P16
-    //% LedPin.defl = P0
+    //% blockId=grove_init_button block="LedButton at| %ButtonPin"
     //% group="Led Button"
-    export function InitButton(ButtonPin: DigitalPin, LedPin: DigitalPin, Mode: LedButtonMode): void {
-        ledbutton.ButtonPin = ButtonPin;
-        ledbutton.LedPin = LedPin;
-        ledbutton._mode = Mode;
+    export function InitButton(ButtonPin: LedButtonPin): void {
+        if(ButtonPin==LedButtonPin.P14) {
+          ledbutton.ButtonPin = DigitalPin.P14;
+          ledbutton.LedPin = DigitalPin.P0;
+        }
+        else if (ButtonPin == LedButtonPin.P15) {
+            ledbutton.ButtonPin = DigitalPin.P15;
+            ledbutton.LedPin = DigitalPin.P1;
+        }
+        else if (ButtonPin == LedButtonPin.P16) {
+            ledbutton.ButtonPin = DigitalPin.P16;
+            ledbutton.LedPin = DigitalPin.P2;
+        }
     }
 
 
