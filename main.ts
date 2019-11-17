@@ -599,8 +599,6 @@ namespace grove {
         }
         ledbutton.Blink = blink
 
-        return ledbutton;
-        
         control.inBackground(() => {
             while (true) {
                 ledbutton.UpdateState();
@@ -618,6 +616,9 @@ namespace grove {
                 basic.pause(100);
             }
         })
+
+        return ledbutton;
+
     }
 
 
