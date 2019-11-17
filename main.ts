@@ -476,8 +476,8 @@ namespace grove {
         }
 
         UpdateState(): void {
-            let vol = pins.digitalReadPin(this.ButtonPin);
-            if (vol == 0) {
+            const v = pins.digitalReadPin(this.ButtonPin);
+            if (v == 0) {
                 this._state ? this._state = false : this._state = true;
                 basic.pause(150);
             }
@@ -601,7 +601,7 @@ namespace grove {
 
         control.inBackground(() => {
             while (true) {
-                //ledbutton.UpdateState();
+                ledbutton.UpdateState();
                 if (ledbutton.GetButtonState()) {
                     if (ledbutton.Blink==true) {
                         ledbutton.LedToggle();
