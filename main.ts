@@ -453,7 +453,7 @@ namespace grove {
         ButtonPin: DigitalPin;
         LedPin: DigitalPin;
         Blink: boolean;
-        _ledstate : boolean;
+        _ledstate: boolean;
         _state: boolean;
         _laststate: boolean;
 
@@ -467,22 +467,22 @@ namespace grove {
 
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
-            if(vol==0) {
+            if (vol == 0) {
                 this.StateToggle();
-                basic.pause(200);
+                basic.pause(300);
             }
             return this._state;
         }
 
         StateToggle(): void {
-            this._state ? this._state = false : this._state = true; 
+            this._state ? this._state = false : this._state = true;
         }
 
 
-        LedOn() : void {
+        LedOn(): void {
             this._ledstate = true;
-            pins.digitalWritePin(this.LedPin,1);
-        } 
+            pins.digitalWritePin(this.LedPin, 1);
+        }
 
         LedOff(): void {
             this._ledstate = false;
@@ -490,11 +490,11 @@ namespace grove {
         }
 
         LedToggle(): void {
-            this._ledstate ? this._ledstate = false : this._ledstate = true;  
-            if(this._ledstate) {
+            if (this._ledstate) {
+                this._ledstate = !this._ledstate;
                 pins.digitalWritePin(this.LedPin, 1);
             }
-            else {                
+            else {
                 pins.digitalWritePin(this.LedPin, 0);
             }
         }
@@ -510,7 +510,6 @@ namespace grove {
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let lastRotary: number = 0;
-    //let lastLedButton: boolean = false;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
@@ -577,7 +576,7 @@ namespace grove {
     //% blockId=grove_init_button block="LedButton at| %ButtonPin | Blink $blink"
     //% blink.defl = false
     //% group="Led Button"
-    export function InitButton(ButtonPin: LedButtonPin, blink : boolean = false): void {
+    export function InitButton(ButtonPin: LedButtonPin, blink: boolean = false): void {
         if (ButtonPin == LedButtonPin.P14) {
             ledbutton.ButtonPin = DigitalPin.P14;
             ledbutton.LedPin = DigitalPin.P0;
@@ -590,7 +589,7 @@ namespace grove {
             ledbutton.ButtonPin = DigitalPin.P16;
             ledbutton.LedPin = DigitalPin.P2;
         }
-        ledbutton.Blink = blink 
+        ledbutton.Blink = blink
     }
 
 
@@ -615,21 +614,21 @@ namespace grove {
         control.inBackground(() => {
             while (true) {
                 const state = ledbutton.CheckState();
-                if(state != ledbutton._laststate) {
+                if (state != ledbutton._laststate) {
                     ledbutton._laststate = state;
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
-                if(state) {
-                    if(ledbutton.Blink) {
-                        ledbutton.LedToggle();    
+                if (state) {
+                    if (ledbutton.Blink) {
+                        ledbutton.LedToggle();
                     }
                     else {
                         ledbutton.LedOn();
                     }
-                } 
+                }
                 else {
                     ledbutton.LedOff();
-                }    
+                }
                 basic.pause(100);
             }
         })
