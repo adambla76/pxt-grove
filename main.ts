@@ -471,10 +471,6 @@ namespace grove {
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
         //% parts="Grove"
         //% group="Led Button"
-        GetButtonState(): boolean {
-            return this._state;
-        }
-
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if (vol == 0) {
