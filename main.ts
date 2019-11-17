@@ -554,9 +554,9 @@ namespace grove {
     //% blockId=grove_init_button block="LedButton at| %ButtonPin"
     //% group="Led Button"
     export function InitButton(ButtonPin: LedButtonPin): void {
-        if(ButtonPin==LedButtonPin.P14) {
-          ledbutton.ButtonPin = DigitalPin.P14;
-          ledbutton.LedPin = DigitalPin.P0;
+        if (ButtonPin == LedButtonPin.P14) {
+            ledbutton.ButtonPin = DigitalPin.P14;
+            ledbutton.LedPin = DigitalPin.P0;
         }
         else if (ButtonPin == LedButtonPin.P15) {
             ledbutton.ButtonPin = DigitalPin.P15;
@@ -576,7 +576,7 @@ namespace grove {
     //% blockId=grove_IsButton_state block="Is Button Pressed"
     //% group="Led Button"
     export function IsButtonPressed(): boolean {
-         return ledbutton.State();
+        return ledbutton.State();
     }
 
     /**
@@ -587,7 +587,7 @@ namespace grove {
     //% blockId=grove_ledbutton_create_event block="on LedButton Blinking|$blink"
     //% blink.shadow="toggleYesNo"
     //% group="Led Button"
-    export function onLedButton(blink : boolean, handler: () => void) {
+    export function onLedButton(blink: boolean, handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
@@ -597,8 +597,13 @@ namespace grove {
                     //basic.pause(200);
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
-                basic.pause(30);
+                if(blink) {
+                    let v = pins.digitalReadPin(ledbutton.LedPin);
+                    v==1 ? v=0 : v=1;
+                    pins.digitalWritePin(ledbutton.LedPin,v)
                 }
+                basic.pause(250);
+            }
         })
 
     }
