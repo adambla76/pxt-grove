@@ -471,7 +471,7 @@ namespace grove {
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
         //% parts="Grove"
         //% group="Led Button"
-        GetState(): boolean {
+        GetButtonState(): boolean {
             return this._state;
         }
 
@@ -602,7 +602,7 @@ namespace grove {
         control.inBackground(() => {
             while (true) {
                 ledbutton.UpdateState();
-                if (ledbutton.GetState()) {
+                if (ledbutton.GetButtonState()) {
                     if (ledbutton.Blink) {
                         ledbutton.LedToggle();
                     }
@@ -631,7 +631,7 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
-                const state = ledbutton.GetState();
+                const state = ledbutton.GetButtonState();
                 if (state != ledbutton._laststate) {
                     ledbutton._laststate = state;
                     control.raiseEvent(ledbuttonEventID, 0);
