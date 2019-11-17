@@ -613,7 +613,7 @@ namespace grove {
                 else {
                     ledbutton.LedOff();
                 }
-                basic.pause(250);
+                basic.pause(200);
             }
         })
 
@@ -630,26 +630,13 @@ namespace grove {
     //% parts="Grove"
     //% group="Led Button"
     export function onLedButton(ledbutton: GroveLedButton, handler: () => void) {
-        control.onEvent(ledbuttonEventID, 0, handler);
+        control.onEvent(ledbuttonEventID, ledbutton.ButtonPin, handler);
         control.inBackground(() => {
             while (true) {
-                const state = ledbutton.GetButtonState();
-                if (state != ledbutton._laststate) {
-                    ledbutton._laststate = state;
-                    control.raiseEvent(ledbuttonEventID, 0);
+                if (ledbutton._state != ledbutton._laststate) {
+                    ledbutton._laststate = ledbutton._state;
+                    control.raiseEvent(ledbuttonEventID, ledbutton.ButtonPin);
                 }
-                if (state) {
-                    if (ledbutton.Blink) {
-                        ledbutton.LedToggle();
-                    }
-                    else {
-                        ledbutton.LedOn();
-                    }
-                }
-                else {
-                    ledbutton.LedOff();
-                }
-                basic.pause(100);
             }
         })
 
