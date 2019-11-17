@@ -627,7 +627,7 @@ namespace grove {
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
          */
-    //% blockId=grove_ledbutton_create_event block="on | %ButtonPin | Changed"
+    //% blockId=grove_ledbutton_create_event block="LedButton on | %ButtonPin | Changed"
     //% parts="Grove"
     //% group="Led Button"
     export function onLedButton(ButtonPin: DigitalPin, handler: () => void){
