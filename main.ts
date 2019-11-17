@@ -452,28 +452,45 @@ namespace grove {
     export class GroveLedButton {
         ButtonPin: DigitalPin;
         LedPin: DigitalPin;
-        _mode: number;
+        _ledstate : boolean;
         _state: boolean;
 
         constructor() {
             this._state = false;
-            this._mode = 0;
+            this._ledstate = false;
         }
 
-        State(): boolean {
+        CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
-
-            if (vol == 0) {
-                this._state = !this._state;
-                if (this._state) {
-                    pins.digitalWritePin(this.LedPin, 1)
-                }
-                else {
-                    pins.digitalWritePin(this.LedPin, 0)
-                }
-                basic.pause(250);
+            if(vol==0) {
+                this.StateToggle();
             }
             return this._state;
+        }
+
+        StateToggle(): void {
+           this._state != this._state; 
+        }
+
+
+        LedOn() : void {
+            this._ledstate = true;
+            pins.digitalWritePin(this.LedPin,1);
+        } 
+
+        LedOff(): void {
+            this._ledstate = false;
+            pins.digitalWritePin(this.LedPin, 0);
+        }
+
+        LedToggle(): void {
+            this._ledstate != this._ledstate;
+            if(this._ledstate) {
+                pins.digitalWritePin(this.LedPin, 1);
+            }
+            else {                
+                pins.digitalWritePin(this.LedPin, 0);
+            }
         }
 
     }
@@ -576,7 +593,7 @@ namespace grove {
     //% blockId=grove_IsButton_state block="Is Button Pressed"
     //% group="Led Button"
     export function IsButtonPressed(): boolean {
-        return ledbutton.State();
+        return ledbutton._state;
     }
 
     /**
@@ -591,17 +608,18 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
-                const vol = ledbutton.State();
+                const vol = ledbutton.CheckState();
                 if (vol != lastLedButton) {
                     lastLedButton = vol;
                     //basic.pause(200);
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
                 if(blink) {
-                    let v = pins.digitalReadPin(ledbutton.LedPin);
-                    v==1 ? v=0 : v=1;
-                    pins.digitalWritePin(ledbutton.LedPin,v)
+                    ledbutton.LedToggle();
                 }
+                else {
+                    ledbutton._state ? ledbutton.LedOn() : ledbutton.LedOff();
+                    }
                 basic.pause(250);
             }
         })
