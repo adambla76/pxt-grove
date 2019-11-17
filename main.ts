@@ -465,6 +465,33 @@ namespace grove {
             this.Blink = false;
         }
 
+
+        /**
+                 * Create a new Grove LedButton
+                 * @param ButtonPin
+                 * @param LedPin 
+                 * @param Blink
+        */
+        //% blockId=grove_init_ledbutton block="%ledbutton| at| %ButtonPin | Blink $blink"
+        //% blink.defl = false
+        //% group="Led Button"
+        Init(ButtonPin: LedButtonPin, blink: boolean = false): void {
+            if (ButtonPin == LedButtonPin.P14) {
+                this.ButtonPin = DigitalPin.P14;
+                this.LedPin = DigitalPin.P0;
+            }
+            else if (ButtonPin == LedButtonPin.P15) {
+                this.ButtonPin = DigitalPin.P15;
+                this.LedPin = DigitalPin.P1;
+            }
+            else if (ButtonPin == LedButtonPin.P16) {
+                this.ButtonPin = DigitalPin.P16;
+                this.LedPin = DigitalPin.P2;
+            }
+            this.Blink = blink
+        }
+
+
         CheckState(): boolean {
             let vol = pins.digitalReadPin(this.ButtonPin);
             if (vol == 0) {
@@ -475,7 +502,7 @@ namespace grove {
         }
 
         StateToggle(): void {
-            this._state ? this._state = false : this._state = true; 
+            this._state ? this._state = false : this._state = true;
         }
 
 
