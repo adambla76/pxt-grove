@@ -614,7 +614,17 @@ namespace grove {
                     lastLedButton = vol;
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
-                blink ? ledbutton.LedToggle() : ledbutton.LedOff();
+                if(vol) {
+                    if(blink) {
+                        ledbutton.LedToggle();    
+                    }
+                    else {
+                        ledbutton.LedOn();
+                    }
+                } 
+                else {
+                    ledbutton.LedOff();
+                }    
                 basic.pause(50);
             }
         })
