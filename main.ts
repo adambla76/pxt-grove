@@ -467,31 +467,6 @@ namespace grove {
 
 
         /**
-                 * Create a new Grove LedButton
-                 * @param ButtonPin
-                 * @param LedPin 
-                 * @param Blink
-        */
-        //% blockId=grove_init_ledbutton block="%ledbutton| at| %ButtonPin | Blink $blink"
-        //% blink.defl = false
-        //% group="Led Button"
-        Init(ButtonPin: LedButtonPin, blink: boolean = false): void {
-            if (ButtonPin == LedButtonPin.P14) {
-                this.ButtonPin = DigitalPin.P14;
-                this.LedPin = DigitalPin.P0;
-            }
-            else if (ButtonPin == LedButtonPin.P15) {
-                this.ButtonPin = DigitalPin.P15;
-                this.LedPin = DigitalPin.P1;
-            }
-            else if (ButtonPin == LedButtonPin.P16) {
-                this.ButtonPin = DigitalPin.P16;
-                this.LedPin = DigitalPin.P2;
-            }
-            this.Blink = blink
-        }
-
-        /**
          * Get state of Grove LedButton
          */
         //% blockId=grove_ledbutton_state block="%ledbutton | Is Activated"
@@ -549,7 +524,7 @@ namespace grove {
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
-    let ledbutton = new GroveLedButton();
+//    let ledbutton = new GroveLedButton();
     let paj7620 = new PAJ7620();
 
 
@@ -604,15 +579,19 @@ namespace grove {
     }
 
     /**
-             * Create a new driver Grove LedButton
-             * @param ButtonPin
-             * @param LedPin 
-             * @param Blink
-    */
+                 * Create a new driver Grove LedButton
+                 * @param ButtonPin
+                 * @param LedPin 
+                 * @param Blink
+        */
     //% blockId=grove_init_button block="LedButton at| %ButtonPin | Blink $blink"
     //% blink.defl = false
+    //% parts="Grove"
+    //  trackArgs=0,2
+    //% blockSetVariable=ledbutton
     //% group="Led Button"
-    export function InitButton(ButtonPin: LedButtonPin, blink: boolean = false): void {
+    export function InitButton(ButtonPin: LedButtonPin, blink: boolean = false): GroveLedButton {
+        let ledbutton = new GroveLedButton();
         if (ButtonPin == LedButtonPin.P14) {
             ledbutton.ButtonPin = DigitalPin.P14;
             ledbutton.LedPin = DigitalPin.P0;
@@ -626,6 +605,7 @@ namespace grove {
             ledbutton.LedPin = DigitalPin.P2;
         }
         ledbutton.Blink = blink
+        return ledbutton;
     }
 
 
@@ -633,9 +613,9 @@ namespace grove {
     /**
      * Get state of Grove LedButton
      */
-    //% blockId=grove_IsButton_state block="Is Button Activated"
+    //% blockId=grove_IsButton_state block="%ledbutton Is Activated"
     //% group="Led Button"
-    export function GetButtonState(): boolean {
+    export function GetButtonState(ledbutton: GroveLedButton): boolean {
         return ledbutton._state;
     }
 
@@ -643,9 +623,9 @@ namespace grove {
          * Do something when a button was pressed by Grove LedButton
          * @param handler code to run
          */
-    //% blockId=grove_ledbutton_create_event block="on LedButton Pressed"
+    //% blockId=grove_ledbutton_create_event block="on %ledbutton Pressed"
     //% group="Led Button"
-    export function onLedButton(handler: () => void) {
+    export function onLedButton(ledbutton: GroveLedButton, handler: () => void) {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
@@ -670,6 +650,7 @@ namespace grove {
         })
 
     }
+
 
 
     /**
