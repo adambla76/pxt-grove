@@ -455,9 +455,12 @@ namespace grove {
         Blink: boolean;
         _ledstate : boolean;
         _state: boolean;
+        _laststate: boolean;
+
 
         constructor() {
             this._state = false;
+            this._laststate = false;
             this._ledstate = false;
             this.Blink = false;
         }
@@ -507,7 +510,7 @@ namespace grove {
     let lastGesture = GroveGesture.None;
     let lastJoystick = GroveJoystickKey.None;
     let lastRotary: number = 0;
-    let lastLedButton: boolean = false;
+    //let lastLedButton: boolean = false;
     let distanceBackup: number = 0;
     let joystick = new GroveJoystick();
     let rotary = new GroveRotary();
@@ -611,12 +614,12 @@ namespace grove {
         control.onEvent(ledbuttonEventID, 0, handler);
         control.inBackground(() => {
             while (true) {
-                const vol = ledbutton.CheckState();
-                if(vol != lastLedButton) {
-                    lastLedButton = vol;
+                const state = ledbutton.CheckState();
+                if(state != ledbutton._laststate) {
+                    ledbutton._laststate = state;
                     control.raiseEvent(ledbuttonEventID, 0);
                 }
-                if(vol) {
+                if(state) {
                     if(ledbutton.Blink) {
                         ledbutton.LedToggle();    
                     }
